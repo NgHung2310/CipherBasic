@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeaserCipher", "CeaserCipher\CeaserCipher.csproj", "{560CADA4-4BCE-44E3-A7CC-74C6119CCBE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayFairCipher", "PlayFairCipher\PlayFairCipher.csproj", "{7420E3D2-3E9E-4161-84CE-C43BC1717692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DonBangCipher", "DonBangCipher\DonBangCipher.csproj", "{16486B4D-2B45-4A74-B073-392666FE08FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VingenereCipher", "VingenereCipher\VingenereCipher.csproj", "{F58CF1EE-6561-4C4A-A5BE-2301D247A433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailFenceCipher", "RailFenceCipher\RailFenceCipher.csproj", "{ABE0E840-8569-4B96-8EF1-FE92E4658BD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaHoaHangCipher", "MaHoaHangCipher\MaHoaHangCipher.csproj", "{0A845999-D797-4996-89B6-9353F8114FB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{560CADA4-4BCE-44E3-A7CC-74C6119CCBE5}.Debug|x86.ActiveCfg = Debug|x86
+		{560CADA4-4BCE-44E3-A7CC-74C6119CCBE5}.Debug|x86.Build.0 = Debug|x86
+		{560CADA4-4BCE-44E3-A7CC-74C6119CCBE5}.Release|x86.ActiveCfg = Release|x86
+		{560CADA4-4BCE-44E3-A7CC-74C6119CCBE5}.Release|x86.Build.0 = Release|x86
+		{7420E3D2-3E9E-4161-84CE-C43BC1717692}.Debug|x86.ActiveCfg = Debug|x86
+		{7420E3D2-3E9E-4161-84CE-C43BC1717692}.Debug|x86.Build.0 = Debug|x86
+		{7420E3D2-3E9E-4161-84CE-C43BC1717692}.Release|x86.ActiveCfg = Release|x86
+		{7420E3D2-3E9E-4161-84CE-C43BC1717692}.Release|x86.Build.0 = Release|x86
+		{16486B4D-2B45-4A74-B073-392666FE08FE}.Debug|x86.ActiveCfg = Debug|x86
+		{16486B4D-2B45-4A74-B073-392666FE08FE}.Debug|x86.Build.0 = Debug|x86
+		{16486B4D-2B45-4A74-B073-392666FE08FE}.Release|x86.ActiveCfg = Release|x86
+		{16486B4D-2B45-4A74-B073-392666FE08FE}.Release|x86.Build.0 = Release|x86
+		{F58CF1EE-6561-4C4A-A5BE-2301D247A433}.Debug|x86.ActiveCfg = Debug|x86
+		{F58CF1EE-6561-4C4A-A5BE-2301D247A433}.Debug|x86.Build.0 = Debug|x86
+		{F58CF1EE-6561-4C4A-A5BE-2301D247A433}.Release|x86.ActiveCfg = Release|x86
+		{F58CF1EE-6561-4C4A-A5BE-2301D247A433}.Release|x86.Build.0 = Release|x86
+		{ABE0E840-8569-4B96-8EF1-FE92E4658BD1}.Debug|x86.ActiveCfg = Debug|x86
+		{ABE0E840-8569-4B96-8EF1-FE92E4658BD1}.Debug|x86.Build.0 = Debug|x86
+		{ABE0E840-8569-4B96-8EF1-FE92E4658BD1}.Release|x86.ActiveCfg = Release|x86
+		{ABE0E840-8569-4B96-8EF1-FE92E4658BD1}.Release|x86.Build.0 = Release|x86
+		{0A845999-D797-4996-89B6-9353F8114FB9}.Debug|x86.ActiveCfg = Debug|x86
+		{0A845999-D797-4996-89B6-9353F8114FB9}.Debug|x86.Build.0 = Debug|x86
+		{0A845999-D797-4996-89B6-9353F8114FB9}.Release|x86.ActiveCfg = Release|x86
+		{0A845999-D797-4996-89B6-9353F8114FB9}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
