@@ -137,6 +137,7 @@ namespace MaHoaHangCipher
             for (int j = 0; j < n; j++)
                 for (int i = 0; i < m; i++)
                 {
+                    
                     if ((i<m-1|| Array.IndexOf(keyIndexs, j + 1) < modnum)&& k < charText.Length)
                     {
                         res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = charText[k];
