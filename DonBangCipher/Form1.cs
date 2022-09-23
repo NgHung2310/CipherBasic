@@ -56,7 +56,7 @@ namespace DonBangCipher
             }
             catch (Exception e)
             {
-                MessageBox.Show("Độ dài khóa không đủ 26 !!");
+                MessageBox.Show("Độ dài khóa phải đủ 26 và đủ từ A-Z !!");
             }
             return "";
         }
@@ -95,7 +95,7 @@ namespace DonBangCipher
             }
             catch (Exception e)
             {
-                MessageBox.Show("Độ dài khóa không đủ 26 !!");
+                MessageBox.Show("Độ dài khóa phải đủ 26 và đủ từ A-Z !!");
             }
             return "";
         }
