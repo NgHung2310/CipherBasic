@@ -109,8 +109,9 @@ namespace MaHoaHangCipher
             {
                 for (int i = 1; i < tableChar.GetLength(0); i++)
                 {
-                    if(tableChar[i, keyIndexs[j] - 1] != char.Parse(" "))
-                        res += tableChar[i, keyIndexs[j] - 1];
+                    
+                    if(tableChar[i, Array.IndexOf(keyIndexs, j + 1)] != char.Parse(" "))
+                        res += tableChar[i, Array.IndexOf(keyIndexs, j+1)];
                 }    
             } 
             return res;
@@ -128,17 +129,6 @@ namespace MaHoaHangCipher
             else
                 m = charText.Length / n + 1;
             int modnum = charText.Length % n;
-            //char[,] tableChar = new char[m, n];
-            //int k = 0;
-            //for (int i = 0; i < m; i++)
-            //    for (int j = 0; j < n; j++)
-            //        if (k < charText.Length)
-            //        {
-            //            tableChar[i, j] = charText[k];
-            //            k++;
-            //        }
-            //        else
-            //            tableChar[i, j] = char.Parse(" ");
             
             int k = 0;
             char[,] res = new char[m + 1, n];
@@ -148,13 +138,13 @@ namespace MaHoaHangCipher
                 for (int i = 0; i < m; i++)
                 {
                     //if (k < charText.Length&&i!=5)
-                    if ((i<m-1|| keyIndexs[j] - 1 < modnum)&& k < charText.Length)
+                    if ((i<m-1|| Array.IndexOf(keyIndexs, j + 1) < modnum)&& k < charText.Length)
                     {
-                        res[i + 1, keyIndexs[j] - 1] = charText[k];
+                        res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = charText[k];
                         k++;
                     }
                     else
-                        res[i + 1, keyIndexs[j] - 1] = char.Parse(" ");
+                        res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = char.Parse(" ");
                 }
             return res;
         }
