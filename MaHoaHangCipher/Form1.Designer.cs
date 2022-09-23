@@ -139,7 +139,7 @@
             this.Controls.Add(this.tbxPlaint);
             this.Controls.Add(this.btnEncrypt);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MaHoaHang";
             this.ResumeLayout(false);
             this.PerformLayout();
 
