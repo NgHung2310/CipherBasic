@@ -25,7 +25,7 @@ namespace MaHoaHangCipher
                 MessageBox.Show("Vui long nhap dung thong tin!!");
                 return;
             }    
-            char[,] tableChar = tableCharEncipher(tbxPlaint.Text.Replace(" ",String.Empty), tbxKey.Text.Replace(" ", String.Empty));
+            char[,] tableChar = tableCharEncipher(tbxPlaint.Text.Replace(" ", ""), fixKey(tbxKey.Text.Replace(" ", "")));
             string chrres = "";
             for (int i = 0; i < tableChar.GetLength(0); i++)
             {
@@ -33,20 +33,19 @@ namespace MaHoaHangCipher
                     chrres += tableChar[i, j]+"\t";
                 chrres += "\n\n";
             }
-            //tableCharText(tbxPlaint.Text, tbxKey.Text);
             richTextBox1.Text=chrres;
-            tbxRes.Text = Encipher(tbxPlaint.Text.Replace(" ", String.Empty), tbxKey.Text.Replace(" ", String.Empty), ' ').Replace(" ", String.Empty);
+            tbxRes.Text = Encipher(tbxPlaint.Text.Replace(" ",""), fixKey(tbxKey.Text.Replace(" ", "")));
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
             int b;
-            if (tbxPlaint.Text.Length <= 0 || tbxKey.Text.Length <= 0 || !int.TryParse(tbxKey.Text.Replace(" ", String.Empty), out b))
+            if (tbxPlaint.Text.Length <= 0 || tbxKey.Text.Length <= 0 || !int.TryParse(tbxKey.Text, out b))
             {
                 MessageBox.Show("Vui long nhap dung thong tin!!");
                 return;
             }
-            char[,] tableChar = tableCharDecipher(tbxPlaint.Text.Replace(" ", String.Empty), tbxKey.Text.Replace(" ", String.Empty));
+            char[,] tableChar = tableCharDecipher(tbxPlaint.Text.Replace(" ", ""), fixKey(tbxKey.Text.Replace(" ", "")));
             string chrres = "";
             for (int i = 0; i < tableChar.GetLength(0); i++)
             {
@@ -54,9 +53,8 @@ namespace MaHoaHangCipher
                     chrres += tableChar[i, j] + "\t";
                 chrres += "\n\n";
             }
-            //tableCharText(tbxPlaint.Text, tbxKey.Text);
             richTextBox1.Text = chrres;
-            tbxRes.Text = Decipher(tbxPlaint.Text.Replace(" ", String.Empty), tbxKey.Text.Replace(" ", String.Empty));
+            tbxRes.Text = Decipher(tbxPlaint.Text.Replace(" ", ""), fixKey(tbxKey.Text.Replace(" ", "")));
         }
 
         public int[] getKeyIndexs(string key)
@@ -93,77 +91,76 @@ namespace MaHoaHangCipher
 
             char[,] res=new char[m+1,n];
             for (int i = 0; i < n; i++)
-                res[0, i] = char.Parse(keyIndexs[i].ToString());
+                res[0, i] = tbxKey.Text[i];
             for (int i = 0; i < m; i++)
                 for (int j = 0; j < n; j++)
                     res[i + 1, j] = tableChar[i, j];
             return res;
         }
 
-        //public string Encipher(string plainText, string key)
-        //{
-        //    char[,] tableChar = tableCharEncipher(plainText, key);
-        //    int[] keyIndexs = getKeyIndexs(key);
-        //    string res = "";
-        //    for (int j = 0; j < tableChar.GetLength(1); j++)
-        //    {
-        //        for (int i = 1; i < tableChar.GetLength(0); i++)
-        //        {
-                    
-        //            if(tableChar[i, Array.IndexOf(keyIndexs, j + 1)] != char.Parse(" "))
-        //                res += tableChar[i, Array.IndexOf(keyIndexs, j+1)];
-        //        }    
-        //    } 
-        //    return res;
-        //}
-
-        public char[,] tableCharDecipher(string plainText, string key)
+        public string Encipher(string plainText, string key)
         {
-            //int m = 0;
-            //int n = 0;
-            //n = getKeyIndexs(key).Length;
-            //int[] keyIndexs = getKeyIndexs(key);
-            //char[] charText = plainText.ToCharArray();
-            //if (charText.Length % n == 0)
-            //    m = charText.Length / n;
-            //else
-            //    m = charText.Length / n + 1;
-            //int modnum = charText.Length % n;
+            char[,] tableChar = tableCharEncipher(plainText, key);
+            int[] keyIndexs = getKeyIndexs(key);
+            string res = "";
+            for (int j = 0; j < tableChar.GetLength(1); j++)
+            {
+                for (int i = 1; i < tableChar.GetLength(0); i++)
+                {
 
-            //int k = 0;
-            //char[,] res = new char[m + 1, n];
-            //for (int i = 0; i < n; i++)
-            //    res[0, i] = char.Parse(keyIndexs[i].ToString());
-            //for (int j = 0; j < n; j++)
-            //    for (int i = 0; i < m; i++)
-            //    {                    
-            //        if ((i<m-1|| Array.IndexOf(keyIndexs, j + 1) < modnum)&& k < charText.Length)
-            //        {
-            //            res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = charText[k];
-            //            k++;
-            //        }
-            //        else
-            //            res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = char.Parse(" ");
-            //    }
-            char[,]  res = tableCharEncipher(Encipher(plainText.Replace(" ",""),key.Replace(" ", ""), ' '), key.Replace(" ", ""));
+                    if (tableChar[i, Array.IndexOf(keyIndexs, j + 1)] != char.Parse(" "))
+                        res += tableChar[i, Array.IndexOf(keyIndexs, j + 1)];
+                }
+            }
             return res;
         }
 
-        //public string Decipher(string plainText, string key)
-        //{
-        //    char[,] tableChar = tableCharDecipher(plainText, key);
-        //    int[] keyIndexs = getKeyIndexs(key);
-        //    string res = "";
-        //    for (int i = 1; i < tableChar.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < tableChar.GetLength(1); j++)
-        //        {
-        //            if (tableChar[i, j] != char.Parse(" "))
-        //                res += tableChar[i,j];
-        //        }
-        //    }
-        //    return res;
-        //}
+        public char[,] tableCharDecipher(string plainText, string key)
+        {
+            int m = 0;
+            int n = 0;
+            n = getKeyIndexs(key).Length;
+            int[] keyIndexs = getKeyIndexs(key);
+            char[] charText = plainText.ToCharArray();
+            if (charText.Length % n == 0)
+                m = charText.Length / n;
+            else
+                m = charText.Length / n + 1;
+            int modnum = charText.Length % n;
+
+            int k = 0;
+            char[,] res = new char[m + 1, n];
+            for (int i = 0; i < n; i++)
+                res[0, i] = tbxKey.Text[i];
+            for (int j = 0; j < n; j++)
+                for (int i = 0; i < m; i++)
+                {
+                    if ((i < m - 1 || Array.IndexOf(keyIndexs, j + 1) < modnum) && k < charText.Length)
+                    {
+                        res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = charText[k];
+                        k++;
+                    }
+                    else
+                        res[i + 1, Array.IndexOf(keyIndexs, j + 1)] = char.Parse(" ");
+                }
+            return res;
+        }
+
+        public string Decipher(string plainText, string key)
+        {
+            char[,] tableChar = tableCharDecipher(plainText, key);
+            int[] keyIndexs = getKeyIndexs(key);
+            string res = "";
+            for (int i = 1; i < tableChar.GetLength(0); i++)
+            {
+                for (int j = 0; j < tableChar.GetLength(1); j++)
+                {
+                    if (tableChar[i, j] != char.Parse(" "))
+                        res += tableChar[i, j];
+                }
+            }
+            return res;
+        }
 
         private int[] GetShiftIndexes(string key)
         {
@@ -187,79 +184,34 @@ namespace MaHoaHangCipher
             return indexes;
         }
 
-        public string Encipher(string input, string key, char padChar)
+        public string fixKey(string key)
         {
-            input = (input.Length % key.Length == 0) ? input : input.PadRight(input.Length - (input.Length % key.Length) + key.Length, padChar);
-            StringBuilder output = new StringBuilder();
-            int totalChars = input.Length;
-            int totalColumns = key.Length;
-            int totalRows = (int)Math.Ceiling((double)totalChars / totalColumns);
-            char[,] rowChars = new char[totalRows, totalColumns];
-            char[,] colChars = new char[totalColumns, totalRows];
-            char[,] sortedColChars = new char[totalColumns, totalRows];
-            int currentRow, currentColumn, i, j;
-            int[] shiftIndexes = GetShiftIndexes(key);
-
-            for (i = 0; i < totalChars; ++i)
+            int[] array = getKeyIndexs(key);
+            List<int> lst = new List<int>();
+            foreach (int item in array)
             {
-                currentRow = i / totalColumns;
-                currentColumn = i % totalColumns;
-                rowChars[currentRow, currentColumn] = input[i];
+                if (lst.IndexOf(item) < 0)
+                    lst.Add(item);
             }
-
-            for (i = 0; i < totalRows; ++i)
-                for (j = 0; j < totalColumns; ++j)
-                    colChars[j, i] = rowChars[i, j];
-
-            for (i = 0; i < totalColumns; ++i)
-                for (j = 0; j < totalRows; ++j)
-                    sortedColChars[shiftIndexes[i], j] = colChars[i, j];
-
-            for (i = 0; i < totalChars; ++i)
+            lst.Sort();
+            int[] subArray = new int[array.Length];
+            int k = 0;
+            for (int i = 0; i < lst.Count; i++)
             {
-                currentRow = i / totalRows;
-                currentColumn = i % totalRows;
-                output.Append(sortedColChars[currentRow, currentColumn]);
-            }
-
-            return output.ToString();
-        }
-
-        public string Decipher(string input, string key)
-        {
-            StringBuilder output = new StringBuilder();
-            int totalChars = input.Length;
-            int totalColumns = (int)Math.Ceiling((double)totalChars / key.Length);
-            int totalRows = key.Length;
-            char[,] rowChars = new char[totalRows, totalColumns];
-            char[,] colChars = new char[totalColumns, totalRows];
-            char[,] unsortedColChars = new char[totalColumns, totalRows];
-            int currentRow, currentColumn, i, j;
-            int[] shiftIndexes = GetShiftIndexes(key);
-
-            for (i = 0; i < totalChars; ++i)
+                for (int j = 0; j < array.Length; j++)
+                {
+                    if (array[j] == lst[i])
+                    {
+                        subArray[j] = ++k;
+                    }
+                }
+            } 
+            char[] chr = new char[subArray.Length];
+            for (int i = 0; i < subArray.Length; i++)
             {
-                currentRow = i / totalColumns;
-                currentColumn = i % totalColumns;
-                rowChars[currentRow, currentColumn] = input[i];
+                chr[i] = Char.Parse(subArray[i].ToString());
             }
-
-            for (i = 0; i < totalRows; ++i)
-                for (j = 0; j < totalColumns; ++j)
-                    colChars[j, i] = rowChars[i, j];
-
-            for (i = 0; i < totalColumns; ++i)
-                for (j = 0; j < totalRows; ++j)
-                    unsortedColChars[i, j] = colChars[i, shiftIndexes[j]];
-
-            for (i = 0; i < totalChars; ++i)
-            {
-                currentRow = i / totalRows;
-                currentColumn = i % totalRows;
-                output.Append(unsortedColChars[currentRow, currentColumn]);
-            }
-
-            return output.ToString();
+            return new String(chr); 
         }
 
     }
