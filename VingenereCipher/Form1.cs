@@ -18,16 +18,30 @@ namespace VingenereCipher
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
-            string key = tbxKey.Text;
-            string plainText = tbxPlaint.Text;
-            tbxRes.Text = Encipher(plainText, key); 
+            //try
+            //{
+                string key = tbxKey.Text;
+                string plainText = tbxPlaint.Text;
+                tbxRes.Text = Encipher(plainText, key);
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Vui lòng nhập chuỗi và khoá là chữ");
+            //}
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
-            string key = tbxKey.Text;
-            string plainText = tbxPlaint.Text;
-            tbxRes.Text = Decipher(plainText, key); 
+            //try
+            //{
+                string key = tbxKey.Text;
+                string plainText = tbxPlaint.Text;
+                tbxRes.Text = Decipher(plainText, key);
+            //}
+            //catch 
+            //{
+            //    MessageBox.Show("Vui lòng nhập chuỗi và khoá là chữ");
+            //}
         }
 
         private int Mod(int a, int b)
@@ -68,6 +82,14 @@ namespace VingenereCipher
 
         public string Encipher(string input, string key)
         {
+            foreach (char c in key)
+            {
+                if (!Char.IsLetter(c))
+                {
+                    MessageBox.Show("Key chỉ được nhập chữ cái");
+                    return "";
+                }
+            }
             char[] chrinput = input.ToCharArray();
             char[] chroutput = Cipher(input, key, true).ToCharArray();
             string res = "";
@@ -79,6 +101,14 @@ namespace VingenereCipher
 
         public string Decipher(string input, string key)
         {
+            foreach (char c in key)
+            {
+                if (!Char.IsLetter(c))
+                {
+                    MessageBox.Show("Key chỉ được nhập chữ cái");
+                    return "";
+                }
+            }
             char[] chrinput = input.ToCharArray();
             char[] chroutput = Cipher(input, key, false).ToCharArray();
             string res = "";

@@ -18,28 +18,44 @@ namespace RailFenceCipher
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
-            if (tbxPlaint.Text.Length <= 0|| tbxKey.Text.Length <= 0)
+            try
             {
-                MessageBox.Show("Vui lòng nhập chuỗi và khoá");
-                return;
-            }    
+                if (tbxPlaint.Text.Length <= 0 || tbxKey.Text.Length <= 0)
+                {
+                    MessageBox.Show("Vui lòng nhập chuỗi và khoá");
+                    return;
+                }
                 int key = int.Parse(tbxKey.Text);
-            string plainText = tbxPlaint.Text;
-            tbxRes.Text = Encrypt(key, plainText);
-            riseRail(key, plainText);
+                string plainText = tbxPlaint.Text;
+                tbxRes.Text = Encrypt(key, plainText.Replace(" ", ""));
+                riseRail(key, plainText.Replace(" ", ""));
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Vui lòng nhập key là 1 số duy nhất!");
+            }
+            
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
-            if (tbxPlaint.Text.Length <= 0 || tbxKey.Text.Length <= 0)
+            try
             {
-                MessageBox.Show("Vui lòng nhập chuỗi và khoá");
-                return;
+                if (tbxPlaint.Text.Length <= 0 || tbxKey.Text.Length <= 0)
+                {
+                    MessageBox.Show("Vui lòng nhập chuỗi và khoá");
+                    return;
+                }
+                int key = int.Parse(tbxKey.Text);
+                string plainText = tbxPlaint.Text;
+                tbxRes.Text = Decrypt(key, plainText.Replace(" ", ""));
+                riseRail(key, Decrypt(key, plainText.Replace(" ", "")));
             }
-            int key = int.Parse(tbxKey.Text);
-            string plainText = tbxPlaint.Text;
-            tbxRes.Text = Decrypt(key, plainText);
-            riseRail(key, Decrypt(key, plainText));
+            catch (Exception a)
+            {
+                MessageBox.Show("Vui lòng nhập key là 1 số duy nhất!");
+            }
+            
         }
 
         public static string Encrypt(int rail, string plainText)

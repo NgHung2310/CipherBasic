@@ -18,11 +18,20 @@ namespace PlayFairCipher
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
+            foreach (char c in tbxKey.Text)
+            {
+                if (!Char.IsLetter(c))
+                {
+                    MessageBox.Show("Key chỉ được nhập chữ cái");
+                    return;
+                }
+            }
+
             this.dataGridView1.DataSource = null;
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
-            string cipherText = Encipher(tbxPlaint.Text, tbxKey.Text);
-            char[,] keySquare = GenerateKeySquare(tbxKey.Text);
+            string cipherText = Encipher(tbxPlaint.Text, tbxKey.Text.Replace(" ",""));
+            char[,] keySquare = GenerateKeySquare(tbxKey.Text.Replace(" ", ""));
 
             dataGridView1.Columns.Add("", "");
             dataGridView1.Columns.Add("", "");
@@ -38,11 +47,19 @@ namespace PlayFairCipher
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
+            foreach (char c in tbxKey.Text)
+            {
+                if (!Char.IsLetter(c))
+                {
+                    MessageBox.Show("Key chỉ được nhập chữ cái");
+                    return;
+                }
+            }
             this.dataGridView1.DataSource = null;
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
-            string cipherText = Decipher(tbxPlaint.Text, tbxKey.Text);
-            char[,] keySquare = GenerateKeySquare(tbxKey.Text);
+            string cipherText = Decipher(tbxPlaint.Text, tbxKey.Text.Replace(" ", ""));
+            char[,] keySquare = GenerateKeySquare(tbxKey.Text.Replace(" ", ""));
 
             dataGridView1.Columns.Add("", "");
             dataGridView1.Columns.Add("", "");
@@ -56,12 +73,12 @@ namespace PlayFairCipher
             tbxRes.Text = cipherText;
         }
 
-        private static int Mod(int a, int b)
+        private  int Mod(int a, int b)
         {
             return (a % b + b) % b;
         }
 
-        private static List<int> FindAllOccurrences(string str, char value)
+        private  List<int> FindAllOccurrences(string str, char value)
         {
             List<int> indexes = new List<int>();
 
@@ -72,7 +89,7 @@ namespace PlayFairCipher
             return indexes;
         }
 
-        private static string RemoveAllDuplicates(string str, List<int> indexes)
+        private  string RemoveAllDuplicates(string str, List<int> indexes)
         {
             string retVal = str;
 
@@ -82,7 +99,7 @@ namespace PlayFairCipher
             return retVal;
         }
 
-        private static char[,] GenerateKeySquare(string key)
+        private  char[,] GenerateKeySquare(string key)
         {
             char[,] keySquare = new char[5, 5];
             string defaultKeySquare = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
@@ -105,7 +122,7 @@ namespace PlayFairCipher
             return keySquare;
         }
 
-        private static void GetPosition(ref char[,] keySquare, char ch, ref int row, ref int col)
+        private  void GetPosition(ref char[,] keySquare, char ch, ref int row, ref int col)
         {
             if (ch == 'J')
                 GetPosition(ref keySquare, 'I', ref row, ref col);
@@ -119,27 +136,27 @@ namespace PlayFairCipher
                     }
         }
 
-        private static char[] SameRow(ref char[,] keySquare, int row, int col1, int col2, int encipher)
+        private  char[] SameRow(ref char[,] keySquare, int row, int col1, int col2, int encipher)
         {
             return new char[] { keySquare[row, Mod((col1 + encipher), 5)], keySquare[row, Mod((col2 + encipher), 5)] };
         }
 
-        private static char[] SameColumn(ref char[,] keySquare, int col, int row1, int row2, int encipher)
+        private  char[] SameColumn(ref char[,] keySquare, int col, int row1, int row2, int encipher)
         {
             return new char[] { keySquare[Mod((row1 + encipher), 5), col], keySquare[Mod((row2 + encipher), 5), col] };
         }
 
-        private static char[] SameRowColumn(ref char[,] keySquare, int row, int col, int encipher)
+        private  char[] SameRowColumn(ref char[,] keySquare, int row, int col, int encipher)
         {
             return new char[] { keySquare[Mod((row + encipher), 5), Mod((col + encipher), 5)], keySquare[Mod((row + encipher), 5), Mod((col + encipher), 5)] };
         }
 
-        private static char[] DifferentRowColumn(ref char[,] keySquare, int row1, int col1, int row2, int col2)
+        private  char[] DifferentRowColumn(ref char[,] keySquare, int row1, int col1, int row2, int col2)
         {
             return new char[] { keySquare[row1, col2], keySquare[row2, col1] };
         }
 
-        private static string RemoveOtherChars(string input)
+        private  string RemoveOtherChars(string input)
         {
             string output = input;
 
@@ -150,7 +167,7 @@ namespace PlayFairCipher
             return output;
         }
 
-        private static string AdjustOutput(string input, string output)
+        private string AdjustOutput(string input, string output)
         {
             StringBuilder retVal = new StringBuilder(output);
 
@@ -166,7 +183,7 @@ namespace PlayFairCipher
             return retVal.ToString();
         }
 
-        private static string Cipher(string input, string key, bool encipher)
+        private string Cipher(string input, string key, bool encipher)
         {
             string retVal = string.Empty;
             char[,] keySquare = GenerateKeySquare(key);
@@ -205,16 +222,21 @@ namespace PlayFairCipher
             }
 
             retVal = AdjustOutput(input, retVal);
-
+            string res = "";
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                res +="\n"+ tempInput[i] + " -> " + retVal[i];
+            }
+            richTextBox1.Text = res;
             return retVal;
         }
 
-        public static string Encipher(string input, string key)
+        public  string Encipher(string input, string key)
         {
             return Cipher(input, key, true);
         }
 
-        public static string Decipher(string input, string key)
+        public  string Decipher(string input, string key)
         {
             return Cipher(input, key, false);
         }
