@@ -75,7 +75,7 @@ namespace DonBangCipher
             {
                 string res = "";
                 res += "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n";
-                res += key+"\n";               
+                res += key.ToUpper()+"\n";               
                 char[] chars = new char[cipherText.Length];
                 for (int i = 0; i < cipherText.Length; i++)
                 {
@@ -95,7 +95,7 @@ namespace DonBangCipher
             }
             catch (Exception e)
             {
-                MessageBox.Show("Độ dài khóa phải đủ 26 và đủ từ A-Z !!");
+                MessageBox.Show("Độ dài khóa phải đủ 26 và đủ từ A-Z !!"); 
             }
             return "";
         }

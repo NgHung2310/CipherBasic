@@ -18,19 +18,31 @@ namespace CeaserCipher
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
-            string cipherText = Encipher(tbxPlaint.Text, int.Parse(tbxKey.Text));
-            tbxRes.Text = cipherText;
+            try { 
+            string cipherText = Encipher(tbxPlaint.Text, int.Parse(tbxKey.Text)%26);
+            tbxRes.Text = cipherText;            
+            }
+            catch(Exception a)
+            {
+                MessageBox.Show("Vui lòng nhập key là 1 số duy nhất!");
+            }
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
-            string cipherText = Decipher(tbxPlaint.Text, int.Parse(tbxKey.Text));
+            try
+            {
+            string cipherText = Decipher(tbxPlaint.Text, int.Parse(tbxKey.Text)%26);
             tbxRes.Text = cipherText;
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Vui lòng nhập key là 1 số duy nhất!");
+            }
         }
 
         public char cipher(char ch, int key)
         {
-            string[] lst = new string[26] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" };
             if (!char.IsLetter(ch))
             {
 
